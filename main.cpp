@@ -3,7 +3,12 @@
 int main()
 {
 
-  cache cacheMem (5);
+  size_t numOfElems;
+  size_t numOfLevels;
+  std::cout << "Привет, пользователь. Введи количество элементов и размер кэша:" << std::endl;
+  std::cin >> numOfElems;
+  std::cin >> numOfLevels;
+  cache cacheMem (numOfElems, numOfLevels);
   cacheMem.dump();
   
 }

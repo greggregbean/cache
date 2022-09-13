@@ -14,10 +14,11 @@ class cache
 {
     private:
         level_map map;
+        size_t numOfElems;
     
     public:
         void dump();
-        cache(int numOfLevels);
+        cache(size_t numOfElems, size_t numOfLevels);
 };
 
 
