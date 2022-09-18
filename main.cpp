@@ -11,11 +11,11 @@ int main() {
 
   int x;
   for(size_t i = 0; i < numOfElems; i++) {
-    std::cout << "Введите число: " << std::endl;
+    std::cout << "Осталось ввести " << numOfElems - i << ". Введите число: " << std::endl;
     std::cin >> x;
     cacheMem.lfu(x);
   } 
-
+  
   cacheMem.dump();
 }
 

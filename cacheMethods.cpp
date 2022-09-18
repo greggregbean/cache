@@ -1,16 +1,16 @@
 #include "cacheSetup.h"
 
-cache::cache(size_t numOfElems, size_t numOfLevels)
+cache::cache(size_t numOfElems, size_t numOfElemsInList)
 {
     cache::numOfElems = numOfElems;
-    cache::numOfLevels = numOfLevels;
+    cache::numOfElemsInList = numOfElemsInList;
 
-    int_list* listArr = new int_list[numOfLevels];
-    std::string* stringArr = new std::string[numOfLevels];
+    int_list* listArr = new int_list[NUMOFLEVELS];
+    std::string* stringArr = new std::string[NUMOFLEVELS];
 
-    for (size_t i = 0; i < numOfLevels; i++) {
+    for (size_t i = 0; i < NUMOFLEVELS; i++) {
         stringArr[i] = "Level ";
-        stringArr[i] += char(numOfLevels - i - 1 + '0');
+        stringArr[i] += char(NUMOFLEVELS - i - 1 + '0');
         map[stringArr[i]] = listArr[i];
     }
 }
@@ -19,7 +19,7 @@ void cache::dump()
 {
     std::cout << "DUMP: \n" << 
     " Number of elements = " << cache::numOfElems << ". \n" <<
-    " Number of levels = " << cache::numOfLevels << "." << std::endl; 
+    " Number of elements in list = " << cache::numOfElemsInList << "." << std::endl; 
     level_map::iterator mapIter = map.begin();
     std::cout << " Level map: " << std::endl;
     while (mapIter != map.end()) {
@@ -52,12 +52,20 @@ level_map::iterator cache::map_find(int x)
     return map.end();
 }
 
+void cache::list_add(int x, level_map::iterator mapIter)
+{
+    if((mapIter -> second).size() >= numOfElemsInList) {
+        (mapIter -> second).pop_front();
+    }
+    (mapIter -> second).push_back(x);
+}
+
 level_map::iterator cache::lfu(int x)
 {
     level_map::iterator resOfFind = map_find(x);
 
     if (resOfFind == map.end()) {
-        ((map.begin()) -> second).push_back(x);
+        list_add(x, map.begin());
         std::cout << "Число " << x << " было добавлено. \n" << std::endl;
     }
 
@@ -72,7 +80,7 @@ level_map::iterator cache::lfu(int x)
             std::cout << "Число " << x << " стоит на " << resOfFind -> first << "." << std::endl;
             (resOfFind -> second).remove(x);
             resOfFind++;
-            (resOfFind -> second).push_back(x);
+            list_add(x, resOfFind);
             std::cout << "Число " << x << " переместилось на " << resOfFind -> first << ". \n" << std::endl;
         }
     }
