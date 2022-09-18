@@ -17,16 +17,18 @@ cache::cache(size_t numOfElems, size_t numOfLevels)
 
 void cache::dump()
 {
-    std::cout << "Number of elements = " << cache::numOfElems << "." << std::endl;
-    std::cout << "Number of levels = " << cache::numOfLevels << "." << std::endl; 
+    std::cout << "DUMP: \n" << 
+    " Number of elements = " << cache::numOfElems << ". \n" <<
+    " Number of levels = " << cache::numOfLevels << "." << std::endl; 
     level_map::iterator mapIter = map.begin();
-    std::cout << "Level map: " << std::endl;
+    std::cout << " Level map: " << std::endl;
     while (mapIter != map.end()) {
-        std::cout << "  Ключ: " << mapIter -> first << ". Значения: ";
+        std::cout << "   Ключ: " << mapIter -> first << ". Значения: ";
         copy((mapIter -> second).begin(), (mapIter -> second).end(), std::ostream_iterator<int>(std::cout, "; "));
         std::cout << "\n";
         mapIter++;
     }
+    std::cout << std::endl;
 }
 
 int cache::list_find(int x, level_map::iterator mapIter)
@@ -56,14 +58,14 @@ level_map::iterator cache::lfu(int x)
 
     if (resOfFind == map.end()) {
         ((map.begin()) -> second).push_back(x);
-        std::cout << "Число " << x << " было добавлено." << std::endl;
+        std::cout << "Число " << x << " было добавлено. \n" << std::endl;
     }
 
     else {
-        auto endOfMap = map.end();
-        endOfMap--;
-        if (resOfFind == endOfMap) { // !!!Вот тут смотреть надо
-            std::cout << "Число " << x << " стоит на последнем уровне." << std::endl;
+        level_map::iterator itCopy = resOfFind;
+        itCopy++;
+        if (itCopy == map.end()) {
+             std::cout << "Число " << x << " стоит на последнем уровне. \n" << std::endl;
         }
 
         else {
@@ -71,7 +73,7 @@ level_map::iterator cache::lfu(int x)
             (resOfFind -> second).remove(x);
             resOfFind++;
             (resOfFind -> second).push_back(x);
-            std::cout << "Число " << x << " переместилось на " << resOfFind -> first << "." << std::endl;
+            std::cout << "Число " << x << " переместилось на " << resOfFind -> first << ". \n" << std::endl;
         }
     }
 
