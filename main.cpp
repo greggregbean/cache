@@ -1,7 +1,6 @@
 #include "cacheSetup.h"
 
-int main()
-{
+int main() {
   size_t numOfElems;
   size_t numOfLevels;
   std::cout << "Привет, пользователь. Введи количество элементов и размер кэша:" << std::endl;
@@ -9,13 +8,15 @@ int main()
   std::cin >> numOfLevels;
   cache cacheMem (numOfElems, numOfLevels);
   cacheMem.dump();
+
   int x;
-  for(size_t i = 0; i < numOfElems; i++)
-  {
-     std::cin >> x;
-     cacheMem.lfu(x);
-  }
-  
+  for(size_t i = 0; i < numOfElems; i++) {
+    std::cout << "Введите число: " << std::endl;
+    std::cin >> x;
+    cacheMem.lfu(x);
+  } 
+
+  cacheMem.dump();
 }
 
 
