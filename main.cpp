@@ -3,7 +3,7 @@
 int main() {
   size_t numOfElems;
   size_t numOfLevels;
-  std::cout << "Привет, пользователь. Введи количество элементов и размер кэша:" << std::endl;
+  std::cout << "Введи количество элементов и размер кэша:" << std::endl;
   std::cin >> numOfElems;
   std::cin >> numOfLevels;
   cache cacheMem (numOfElems, numOfLevels);
@@ -13,7 +13,7 @@ int main() {
   for(size_t i = 0; i < numOfElems; i++) {
     std::cout << "Осталось ввести " << numOfElems - i << ". Введите число: " << std::endl;
     std::cin >> x;
-    cacheMem.lfu(x);
+    cacheMem.lru(x);
   } 
   
   cacheMem.dump();

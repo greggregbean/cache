@@ -1,55 +1,57 @@
 #include "cacheSetup.h"
 
-cache::cache(size_t numOfElems, size_t numOfElemsInList)
+cache::cache(size_t numOfElems_, size_t numOfElemsInList_) : numOfElems(numOfElems_), numOfElemsInList(numOfElemsInList_), numOfHits(0)
 {
-    cache::numOfElems = numOfElems;
-    cache::numOfElemsInList = numOfElemsInList;
-
-    int_list* listArr = new int_list[NUMOFLEVELS];
     std::string* stringArr = new std::string[NUMOFLEVELS];
+    int_list* listArr = new int_list[NUMOFLEVELS];
 
     for (size_t i = 0; i < NUMOFLEVELS; i++) {
         stringArr[i] = "Level ";
         stringArr[i] += char(NUMOFLEVELS - i - 1 + '0');
-        map[stringArr[i]] = listArr[i];
+        lfu_map[stringArr[i]] = listArr[i];
     }
 }
 
 void cache::dump()
 {
     std::cout << "DUMP: \n" << 
-    " Number of elements = " << cache::numOfElems << ". \n" <<
-    " Number of elements in list = " << cache::numOfElemsInList << "." << std::endl; 
-    level_map::iterator mapIter = map.begin();
-    std::cout << " Level map: " << std::endl;
-    while (mapIter != map.end()) {
+    " Number of elements = " << numOfElems << ". \n" <<
+    " Number of elements in list = " << numOfElemsInList << ". \n" 
+    " Number of hits = " << numOfHits << ". \n" << std::endl;
+
+    level_map::iterator mapIter = lfu_map.begin();
+    std::cout << " LFU part: " << std::endl;
+    while (mapIter != lfu_map.end()) {
         std::cout << "   Ключ: " << mapIter -> first << ". Значения: ";
         copy((mapIter -> second).begin(), (mapIter -> second).end(), std::ostream_iterator<int>(std::cout, "; "));
         std::cout << "\n";
         mapIter++;
     }
     std::cout << std::endl;
+
+    std::cout << " LRU part: ";
+    copy(lru_list.begin(), lru_list.end(), std::ostream_iterator<int>(std::cout, ";"));
+    std::cout << "\n" << std::endl;
 }
 
-int cache::list_find(int x, level_map::iterator mapIter)
+int_list::iterator cache::list_find(int x, int_list& currentList)
 {
-    int_list currentList = mapIter -> second;
     int_list::iterator listIter = currentList.begin();
     while(listIter != currentList.end()) {
-        if(*listIter == x) return FOUND;
+        if(*listIter == x) break;
         listIter++;
     }
-    return NOTFOUND;
+    return listIter;
 }
 
 level_map::iterator cache::map_find(int x)
 {
-    level_map::iterator mapIter = map.begin();
-    while (mapIter != map.end()) {
-        if(list_find(x, mapIter) == FOUND) return mapIter;
+    level_map::iterator mapIter = lfu_map.begin();
+    while (mapIter != lfu_map.end()) {
+        if(list_find(x, mapIter -> second) != (mapIter -> second).end()) return mapIter;
         mapIter++;
     }
-    return map.end();
+    return lfu_map.end();
 }
 
 void cache::list_add(int x, level_map::iterator mapIter)
@@ -64,16 +66,17 @@ level_map::iterator cache::lfu(int x)
 {
     level_map::iterator resOfFind = map_find(x);
 
-    if (resOfFind == map.end()) {
-        list_add(x, map.begin());
+    if (resOfFind == lfu_map.end()) {
+        list_add(x, lfu_map.begin());
         std::cout << "Число " << x << " было добавлено. \n" << std::endl;
     }
 
     else {
         level_map::iterator itCopy = resOfFind;
         itCopy++;
-        if (itCopy == map.end()) {
-             std::cout << "Число " << x << " стоит на последнем уровне. \n" << std::endl;
+
+        if (itCopy == lfu_map.end()) {
+            std::cout << "Число " << x << " стоит на последнем уровне. \n" << std::endl;
         }
 
         else {
@@ -82,6 +85,30 @@ level_map::iterator cache::lfu(int x)
             resOfFind++;
             list_add(x, resOfFind);
             std::cout << "Число " << x << " переместилось на " << resOfFind -> first << ". \n" << std::endl;
+        }
+
+        numOfHits++;
+    }
+
+    return resOfFind;
+}
+
+int_list::iterator cache::lru(int x)
+{
+    int_list::iterator resOfFind = list_find(x, lru_list);
+
+    lru_list.push_front(x);
+
+    if(resOfFind != lru_list.end()) {
+        std::cout << "Попадание." << std::endl;
+        lru_list.erase(resOfFind);
+    }
+
+    else {
+        std::cout << "Новый элемент." << std::endl;
+        if(lru_list.size() > numOfElemsInList) { 
+            std::cout << "Переполнение." << std::endl;
+            lru_list.pop_back();
         }
     }
 
