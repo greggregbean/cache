@@ -1,7 +1,10 @@
 #include "cacheSetup.h"
 
-cache::cache(size_t numOfElems_, size_t numOfElemsInList_) : numOfElems(numOfElems_), numOfElemsInList(numOfElemsInList_), numOfHits(0)
-{
+cache::cache(size_t numOfElems_, size_t sizeOfCache_) : 
+    numOfElems(numOfElems_), sizeOfCache(sizeOfCache_), 
+    sizeOfLfu(sizeOfCache_ / (2*NUMOFLEVELS)), sizeOfLru(sizeOfCache_ - (sizeOfLfu * NUMOFLEVELS)), 
+    numOfHits(0) {
+
     std::string* stringArr = new std::string[NUMOFLEVELS];
     int_list* listArr = new int_list[NUMOFLEVELS];
 
@@ -12,11 +15,12 @@ cache::cache(size_t numOfElems_, size_t numOfElemsInList_) : numOfElems(numOfEle
     }
 }
 
-void cache::dump()
-{
+void cache::dump() {
     std::cout << "DUMP: \n" << 
     " Number of elements = " << numOfElems << ". \n" <<
-    " Number of elements in list = " << numOfElemsInList << ". \n" 
+    " Size of cache = " << sizeOfCache << ". \n" <<
+    " Size of LFU = NUMOFLEVELS(" << NUMOFLEVELS << ") * NUMOFELEMSINLEVEL(" << sizeOfLfu << ")" << ". \n" <<
+    " Size of LRU = " << sizeOfLru << ". \n" << 
     " Number of hits = " << numOfHits << ". \n" << std::endl;
 
     level_map::iterator mapIter = lfu_map.begin();
@@ -34,8 +38,7 @@ void cache::dump()
     std::cout << "\n" << std::endl;
 }
 
-int_list::iterator cache::list_find(int x, int_list& currentList)
-{
+int_list::iterator cache::list_find(int x, int_list& currentList) {
     int_list::iterator listIter = currentList.begin();
     while(listIter != currentList.end()) {
         if(*listIter == x) break;
@@ -44,8 +47,7 @@ int_list::iterator cache::list_find(int x, int_list& currentList)
     return listIter;
 }
 
-level_map::iterator cache::map_find(int x)
-{
+level_map::iterator cache::map_find(int x) {
     level_map::iterator mapIter = lfu_map.begin();
     while (mapIter != lfu_map.end()) {
         if(list_find(x, mapIter -> second) != (mapIter -> second).end()) return mapIter;
@@ -56,14 +58,19 @@ level_map::iterator cache::map_find(int x)
 
 void cache::list_add(int x, level_map::iterator mapIter)
 {
-    if((mapIter -> second).size() >= numOfElemsInList) {
-        (mapIter -> second).pop_front();
+    if((mapIter -> second).size() >= sizeOfLfu) {
+        if(mapIter -> first == "Level 0")
+            (mapIter -> second).pop_front();
+        else {
+            int tmp = *((mapIter -> second).begin());
+            (mapIter -> second).pop_front();   
+            list_add(tmp, std::prev(mapIter));
+        }
     }
     (mapIter -> second).push_back(x);
 }
 
-level_map::iterator cache::lfu(int x)
-{
+level_map::iterator cache::lfu(int x) {
     level_map::iterator resOfFind = map_find(x);
 
     if (resOfFind == lfu_map.end()) {
@@ -93,8 +100,7 @@ level_map::iterator cache::lfu(int x)
     return resOfFind;
 }
 
-int_list::iterator cache::lru(int x)
-{
+int_list::iterator cache::lru(int x) {
     int_list::iterator resOfFind = list_find(x, lru_list);
 
     lru_list.push_front(x);
@@ -106,7 +112,7 @@ int_list::iterator cache::lru(int x)
 
     else {
         std::cout << "Новый элемент." << std::endl;
-        if(lru_list.size() > numOfElemsInList) { 
+        if(lru_list.size() > sizeOfLfu) { 
             std::cout << "Переполнение." << std::endl;
             lru_list.pop_back();
         }

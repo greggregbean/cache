@@ -21,7 +21,9 @@ class cache {
         level_map lfu_map;
         int_list lru_list;
         size_t numOfElems;
-        size_t numOfElemsInList;
+        size_t sizeOfCache;
+        size_t sizeOfLfu;
+        size_t sizeOfLru;
         size_t numOfHits;
         void list_add(int x, level_map::iterator mapIter);
     

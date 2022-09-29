@@ -13,7 +13,7 @@ int main() {
   for(size_t i = 0; i < numOfElems; i++) {
     std::cout << "Осталось ввести " << numOfElems - i << ". Введите число: " << std::endl;
     std::cin >> x;
-    cacheMem.lru(x);
+    cacheMem.lfu(x);
   } 
   
   cacheMem.dump();
