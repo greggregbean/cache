@@ -2,16 +2,16 @@
 
 int main() {
   size_t numOfElems;
-  size_t numOfLevels;
-  std::cout << "Введи количество элементов и размер кэша:" << std::endl;
+  size_t capacityOfCache;
+  std::cout << "Enter number of elements and capacity of cache:" << std::endl;
   std::cin >> numOfElems;
-  std::cin >> numOfLevels;
-  cache cacheMem (numOfElems, numOfLevels);
+  std::cin >> capacityOfCache;
+  cache cacheMem (capacityOfCache);
   cacheMem.dump();
 
   int x;
   for(size_t i = 0; i < numOfElems; i++) {
-    std::cout << "Осталось ввести " << numOfElems - i << ". Введите число: " << std::endl;
+    std::cout << "Left " << numOfElems - i << " numbers. Enter a number: " << std::endl;
     std::cin >> x;
     cacheMem.lfu(x);
   } 
