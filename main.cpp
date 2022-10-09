@@ -14,8 +14,8 @@ int main() {
     std::cout << "Left " << numOfElems - i << " numbers. Enter a number: " << std::endl;
     std::cin >> x;
     cacheMem.lfu(x);
+    cacheMem.graphdump();
   } 
-  cacheMem.graphdump();
   cacheMem.dump();
 }
 
