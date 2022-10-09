@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <iterator>
 #include <string.h>
+#include <fstream>
 
 #define NUM_OF_LEVELS 5
 
@@ -30,12 +31,16 @@ class cache {
         void lru_list_add(int x);
     
     public:
-        void dump();
         cache(size_t capacityOfCache_);
+
         int_list::iterator list_find(int x, int_list& currentList);
         level_map::iterator map_find(int x);
+
         level_map::iterator lfu(int x);
         int_list::iterator lru(int x);
+        
+        void dump();
+        void graphdump();
 };
 
 

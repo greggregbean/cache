@@ -15,7 +15,7 @@ int main() {
     std::cin >> x;
     cacheMem.lfu(x);
   } 
-  
+  cacheMem.graphdump();
   cacheMem.dump();
 }
 
