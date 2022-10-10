@@ -8,7 +8,7 @@ in LRU, and when we hit at him, he is being replaced to LFU.
 
 To test my ARC on your computer you should make 3 simple steps:
 1) Clone this repository
-2) Enter "make" in your terminal
+2) Enter "make" in your console
 3) Launch file "run"
 
 To see graphic vizualization of ARC, you can open graph.dot with Graphviz or special extesion for .dot files in Visual Studio Code.
