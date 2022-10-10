@@ -1,14 +1,17 @@
-all:
-	g++ -std=c++11 -Wall -Wextra -Wpedantic lfuMethods.cpp lruMethods.cpp cacheMethods.cpp graphdump.cpp main.cpp -o run
+run: lfuMethods.o lruMethods.o cacheMethods.o graphdump.o main.o
+	g++ -std=c++11 -Wall -Wextra -Wpedantic lfuMethods.o lruMethods.o cacheMethods.o graphdump.o main.o -o run
 
-cache:
-	g++ -std=c++11 -Wall -Wextra -Wpedantic cacheMethods.cpp -o cache
+main.o:
+	g++ -std=c++11 -c -Wall -Wextra -Wpedantic main.cpp -o main.o
 
-lru:
-	g++ -std=c++11 -Wall -Wextra -Wpedantic lruMethods.cpp -o lru
+cacheMethods.o:
+	g++ -std=c++11 -c -Wall -Wextra -Wpedantic cacheMethods.cpp -o cacheMethods.o
 
-lfu:
-	g++ -std=c++11 -Wall -Wextra -Wpedantic lfuMethods.cpp -o lfu
+lruMethods.o:
+	g++ -std=c++11 -c -Wall -Wextra -Wpedantic lruMethods.cpp -o lruMethods.o
 
-graph:
-	g++ -std=c++11 -Wall -Wextra -Wpedantic graphdump.cpp -o graphdump
+lfuMethods.o:
+	g++ -std=c++11 -c -Wall -Wextra -Wpedantic lfuMethods.cpp -o lfuMethods.o
+
+graphdump.o:
+	g++ -std=c++11 -c -Wall -Wextra -Wpedantic graphdump.cpp -o graphdump.o
