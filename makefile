@@ -1,17 +1,15 @@
-run: lfuMethods.o lruMethods.o cacheMethods.o graphdump.o main.o
-	g++ -std=c++11 -Wall -Wextra -Wpedantic lfuMethods.o lruMethods.o cacheMethods.o graphdump.o main.o -o run
+TARGET = run
+CC = g++
+CFLAGS = -std=c++11 -c -Wall -Wextra -Wpedantic
 
-main.o:
-	g++ -std=c++11 -c -Wall -Wextra -Wpedantic main.cpp -o main.o
+SRC = $(wildcard *.cpp)
+OBJ = $(patsubst %.cpp, %.o, $(SRC))
 
-cacheMethods.o:
-	g++ -std=c++11 -c -Wall -Wextra -Wpedantic cacheMethods.cpp -o cacheMethods.o
+$(TARGET): $(OBJ)
+	$(CC) -std=c++11 -Wall -Wextra -Wpedantic $(OBJ) -o $(TARGET)
 
-lruMethods.o:
-	g++ -std=c++11 -c -Wall -Wextra -Wpedantic lruMethods.cpp -o lruMethods.o
+%.o : %.cpp
+	$(CC) $(CFLAGS) $< -o $@
 
-lfuMethods.o:
-	g++ -std=c++11 -c -Wall -Wextra -Wpedantic lfuMethods.cpp -o lfuMethods.o
-
-graphdump.o:
-	g++ -std=c++11 -c -Wall -Wextra -Wpedantic graphdump.cpp -o graphdump.o
+clean :
+	rm $(TARGET) *.o 

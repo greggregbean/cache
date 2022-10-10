@@ -8,6 +8,7 @@ int main() {
   std::cin >> capacityOfCache;
   cache cacheMem (capacityOfCache);
   cacheMem.dump();
+  cacheMem.graphdump();
 
   int x;
   for(size_t i = 0; i < numOfElems; i++) {
