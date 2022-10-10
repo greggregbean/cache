@@ -1,15 +1,19 @@
 TARGET = run
-CC = g++
-CFLAGS = -std=c++11 -c -Wall -Wextra -Wpedantic
 
-SRC = $(wildcard *.cpp)
-OBJ = $(patsubst %.cpp, %.o, $(SRC))
+CC = g++
+CFLAGS = -std=c++11 -Wall -Wextra -Wpedantic
+
+PREF_SRC = ./source/
+PREF_OBJ = ./objects/
+
+SRC = $(wildcard $(PREF_SRC)*.cpp)
+OBJ = $(patsubst $(PREF_SRC)%.cpp, $(PREF_OBJ)%.o, $(SRC))
 
 $(TARGET): $(OBJ)
-	$(CC) -std=c++11 -Wall -Wextra -Wpedantic $(OBJ) -o $(TARGET)
+	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET)
 
-%.o : %.cpp
-	$(CC) $(CFLAGS) $< -o $@
+$(PREF_OBJ)%.o : $(PREF_SRC)%.cpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
 clean :
-	rm $(TARGET) *.o 
+	rm $(TARGET) $(PREF_OBJ)*.o 
