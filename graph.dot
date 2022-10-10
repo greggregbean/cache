@@ -1,0 +1,24 @@
+digraph {
+    subgraph cluster_lfu {
+        node [shape=record, fillcolor = darkolivegreen2, style = filled ]
+        label = "LFU part";
+        Level_0[ fillcolor = darkolivegreen, label = "Level 0"] 
+        Level_1[ fillcolor = darkolivegreen, label = "Level 1"] 
+        0 [ label = " 0 "] 
+        1 [ label = " 1 "] 
+        2 [ label = " 2 "] 
+        0 -> 1; 
+        1 -> 2; 
+        Level_1 -> 0; 
+
+        Level_2[ fillcolor = darkolivegreen, label = "Level 2"] 
+        Level_3[ fillcolor = darkolivegreen, label = "Level 3"] 
+        Level_4[ fillcolor = darkolivegreen, label = "Level 4"] 
+    }
+    subgraph cluster_lru {
+        node [shape=record, fillcolor = darkolivegreen2, style = filled ]
+        label = "LRU part";
+        4 [ label = " 4 "] 
+    }
+
+}
