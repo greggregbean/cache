@@ -6,10 +6,12 @@ It is called Adaptive Replacement Cache, because it can split cache memory betwe
 So when LFU has not enough memory it takes this memory from LRU and vice versa. LFU has bigger priority, then LRU. It means that, firstly, new element is placed 
 in LRU, and when we hit at him, he is being replaced to LFU. 
 
-To test my ARC on your computer you should make 3 simple steps:
+To test my ARC on your computer you should make 5 simple steps:
 1) Clone this repository
 2) Enter "make" in your console
 3) Launch file "run"
+4) Literally test ARC
+5) Enter "make clean" to remove all object files
 
 To see graphic vizualization of ARC, you can open graph.dot with Graphviz or special extesion for .dot files in Visual Studio Code.
 It's really amusing to watch this in real time.
