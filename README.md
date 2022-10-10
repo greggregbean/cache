@@ -1,7 +1,7 @@
 # ARC cache
 Hi, user! This is my ARC cache. Let me tell you about it. 
 
-ARC(Adaptive Replacement Cache) is a combination of LRU(Last Recently Used) and LFU(Last Frequently used) caches.
+ARC (Adaptive Replacement Cache) is a combination of LRU (Last Recently Used) and LFU (Last Frequently used) caches.
 It is called Adaptive Replacement Cache, because it can split cache memory between LFU and LRU depending on what type of cache is more neccesarry in a moment.
 So when LFU has not enough memory it takes this memory from LRU and vice versa. LFU has bigger priority, then LRU. It means that, firstly, new element is placed 
 in LRU, and when we hit at him, he is being replaced to LFU. 
