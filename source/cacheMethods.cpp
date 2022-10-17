@@ -7,14 +7,12 @@ cache::cache(size_t capacityOfCache_):
     sizeOfLfu(0),
     sizeOfLru(0),
     numOfHits(0) {
-
-    std::string* stringArr = new std::string[NUM_OF_LEVELS];
-    int_list* listArr = new int_list[NUM_OF_LEVELS];
-
     for (size_t i = 0; i < NUM_OF_LEVELS; ++i) {
-        stringArr[i] = "Level ";
-        stringArr[i] += char(NUM_OF_LEVELS - i - 1 + '0');
-        lfu_map[stringArr[i]] = listArr[i];
+        std::string str = "Level ";
+        str += (NUM_OF_LEVELS - i - 1 + '0');
+        std::cout << str << std::endl;
+        int_list lst;
+        lfu_map[str] =  lst;
     }
 }
 
