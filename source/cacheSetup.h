@@ -8,7 +8,7 @@
 #include <string.h>
 #include <fstream>
 
-#define NUM_OF_LEVELS 5
+#define NUM_OF_LEVELS 2
 
 typedef std::list <int> int_list;
 typedef std::unordered_map <std::string, int_list> level_map;
@@ -22,7 +22,6 @@ class cache {
         size_t capacityOfLfu;
         size_t capacityOfLru;
 
-        size_t sizeOfCahce;
         size_t sizeOfLfu;
         size_t sizeOfLru;
 
@@ -41,6 +40,8 @@ class cache {
         
         void dump();
         void graphdump();
+
+        void hits_into_file(std::ofstream& file) {file << numOfHits;};
 };
 
 
