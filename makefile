@@ -1,4 +1,5 @@
 TARGET = run
+HEADER = ./source/cacheSetup.h
 
 CC = g++
 CFLAGS = -std=c++11 -Wall -Wextra -Wpedantic
@@ -12,7 +13,7 @@ OBJ = $(patsubst $(PREF_SRC)%.cpp, $(PREF_OBJ)%.o, $(SRC))
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET)
 
-$(PREF_OBJ)%.o : $(PREF_SRC)%.cpp
+$(PREF_OBJ)%.o : $(PREF_SRC)%.cpp $(HEADER)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 clean :

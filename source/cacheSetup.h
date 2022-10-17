@@ -8,7 +8,7 @@
 #include <string.h>
 #include <fstream>
 
-#define NUM_OF_LEVELS 2
+#define NUM_OF_LEVELS 10
 
 typedef std::list <int> int_list;
 typedef std::unordered_map <std::string, int_list> level_map;
