@@ -1,4 +1,4 @@
 
 .vscode/settings.json
-result.txt
-graph.dot
+*.txt
+*.dot
