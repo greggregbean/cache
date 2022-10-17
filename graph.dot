@@ -4,15 +4,16 @@ digraph {
         label = "LFU part";
         Level_0[ fillcolor = darkolivegreen, label = "Level 0"] 
         Level_1[ fillcolor = darkolivegreen, label = "Level 1"] 
+        7 [ label = " 7 "] 
         6 [ label = " 6 "] 
-        4 [ label = " 4 "] 
-        6 -> 4; 
-        Level_1 -> 6; 
+        7 -> 6; 
+        Level_1 -> 7; 
 
     }
     subgraph cluster_lru {
         node [shape=record, fillcolor = darkolivegreen2, style = filled ]
         label = "LRU part";
+        9 [ label = " 9 "] 
     }
 
 }

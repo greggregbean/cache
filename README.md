@@ -7,6 +7,8 @@ So when LFU has not enough memory it takes this memory from LRU and vice versa. 
 
 To test my cache just clone this repository and enter "./run" in console. If you want to build this project by yourself, you should firstly enter "make clean" to remove all existing object files.
 
+You can see input numbers and number of hits in result.txt. 
+
 To see graphic vizualization of F&Q, you can open graph.dot with Graphviz or special extesion for .dot files in Visual Studio Code.
 It's really amusing to watch this in real time.
 
