@@ -1,6 +1,6 @@
 #include "cacheSetup.h"
 
-level_map::iterator cache::map_find(int x) {
+level_map::iterator cache::map_find(int x){
     level_map::iterator mapIter = lfu_map.begin();
     while (mapIter != lfu_map.end()) {
         if(list_find(x, mapIter -> second) != (mapIter -> second).end()) return mapIter;
@@ -9,8 +9,7 @@ level_map::iterator cache::map_find(int x) {
     return lfu_map.end();
 }
 
-void cache::lfu_list_add(int x, const std::string& level)
-{
+void cache::lfu_list_add(int x, const std::string& level) {
     if(sizeOfLfu == capacityOfLfu) {
             ++capacityOfLfu;
             --capacityOfLru;

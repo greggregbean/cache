@@ -39,7 +39,7 @@ void cache::dump() {
     std::cout << "\n" << std::endl;
 }
 
-int_list::iterator cache::list_find(int x, int_list& currentList) {
+int_list::iterator cache::list_find (int x, int_list& currentList) {
     int_list::iterator listIter = currentList.begin();
     while(listIter != currentList.end()) {
         if(*listIter == x) break;
