@@ -1,14 +1,14 @@
 #include "cacheSetup.h"
 
-void list_garphdump(int_list& lst, std::ofstream& file) { 
-    int_list::iterator iter = lst.begin();
+void cache::list_garphdump(const int_list& lst, std::ofstream& file) const { 
+    int_list::const_iterator iter = lst.begin();
     while(iter != lst.end()) {
         file << std::setw(9) << *iter << " [ label = \" "<< *iter << " \"] \n";
         iter++;
     }
 
     iter = lst.begin();
-    int_list::iterator next_iter = lst.begin();
+    int_list::const_iterator next_iter = lst.begin();
     next_iter++;
 
     while(next_iter != lst.end()) {
@@ -17,7 +17,7 @@ void list_garphdump(int_list& lst, std::ofstream& file) {
     }
 }
 
-void cache::graphdump() {
+void cache::graphdump() const {
     std::ofstream file;
     file.open("graph.dot", std::ofstream::out);
     file << "digraph {\n\
@@ -25,7 +25,7 @@ void cache::graphdump() {
         node [shape=record, fillcolor = darkolivegreen2, style = filled ]\n\
         label = \"LFU part\";" << std::endl;
     
-    level_map::iterator mapIter = lfu_map.begin();
+    level_map::const_iterator mapIter = lfu_map.begin();
     int i = 0;
     while(mapIter != lfu_map.end()) {
         file << std::setw(14) <<"Level_" << i << "[ fillcolor = darkolivegreen, label = \"" << mapIter -> first << "\"] \n";

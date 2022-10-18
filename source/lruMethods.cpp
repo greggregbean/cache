@@ -42,7 +42,7 @@ void cache::lru_list_add (int x) {
 }
 
 int_list::iterator cache::lru(int x) {
-    int_list::iterator resOfFind = list_find(x, lru_list);
+    int_list::iterator resOfFind = remove_constness(lru_list, list_find(x, lru_list));
 
     if(resOfFind != lru_list.end()) {
         std::cout << "LRU HIT! (◕‿◕)\n" << std::endl;
