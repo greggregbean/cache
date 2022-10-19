@@ -2,7 +2,7 @@ TARGET = run
 HEADER = ./source/cacheSetup.h
 
 CC = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra -Wpedantic
+override CXXFLAGS += -std=c++11 -Wall -Wextra -Wpedantic
 
 PREF_SRC = ./source/
 PREF_OBJ = ./object/
