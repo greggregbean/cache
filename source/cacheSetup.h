@@ -32,7 +32,6 @@ class cache {
     
     public:
         cache(size_t capacityOfCache_);
-        //~cache();
 
         int_list::const_iterator list_find(int x, const int_list& currentList) const;
         level_map::const_iterator map_find(int x) const;

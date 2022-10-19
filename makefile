@@ -2,7 +2,7 @@ TARGET = run
 HEADER = ./source/cacheSetup.h
 
 CC = g++
-CFLAGS = -std=c++11 -Wall -Wextra -Wpedantic
+CXXFLAGS = -std=c++11 -Wall -Wextra -Wpedantic
 
 PREF_SRC = ./source/
 PREF_OBJ = ./object/
@@ -11,10 +11,10 @@ SRC = $(wildcard $(PREF_SRC)*.cpp)
 OBJ = $(patsubst $(PREF_SRC)%.cpp, $(PREF_OBJ)%.o, $(SRC))
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET)
+	$(CC) $(CXXFLAGS) $(OBJ) -o $(TARGET)
 
 $(PREF_OBJ)%.o : $(PREF_SRC)%.cpp $(HEADER)
-	$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CXXFLAGS) $< -o $@
 
 clean :
 	rm $(TARGET) $(PREF_OBJ)*.o 

@@ -34,7 +34,6 @@ int main() {
   cacheMem.hits_into_file(result);
   result.close();
   cacheMem.dump();
-
 }
 
 
