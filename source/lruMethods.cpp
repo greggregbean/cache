@@ -1,3 +1,5 @@
+// All coments are for debugging. Don't pay attention to them.
+
 #include "cacheSetup.h"
 
 void cache::lru_list_add (int x) {

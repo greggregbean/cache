@@ -1,3 +1,5 @@
+// All coments are for debugging. Don't pay attention to them.
+
 #include "cacheSetup.h"
 
 cache::cache(size_t capacityOfCache_): 

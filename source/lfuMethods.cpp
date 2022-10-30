@@ -1,3 +1,5 @@
+// All coments are for debugging. Don't pay attention to them.
+
 #include "cacheSetup.h"
 
 level_map::const_iterator cache::map_find(int x) const {
