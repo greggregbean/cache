@@ -10,7 +10,7 @@ cache::cache(size_t capacityOfCache_):
     for (size_t i = 0; i < NUM_OF_LEVELS; ++i) {
         std::string level = "Level ";
         level += (NUM_OF_LEVELS - i - 1 + '0');
-        std::cout << level << std::endl;
+        // std::cout << level << std::endl;
         int_list lst;
         lfu_map[level] =  lst;
     }

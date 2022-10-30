@@ -42,7 +42,7 @@ class cache {
         void dump() const;
         void graphdump() const;
 
-        void hits_into_file (std::ofstream& file) {file << numOfHits;};
+        void show_hits() {std::cout << numOfHits << std::endl;}
 };
 
 template <typename Container, typename ConstIterator>
