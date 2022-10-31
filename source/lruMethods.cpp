@@ -52,7 +52,7 @@ int_list::iterator cache::lru(int x) {
 
         lru_list.erase(resOfFind);
         --sizeOfLru;
-        lfu_list_add(x, "Level 0");
+        lfu_list_add(x, 0);
     }
 
     else lru_list_add(x);

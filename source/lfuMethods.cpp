@@ -11,7 +11,7 @@ level_map::const_iterator cache::map_find(int x) const {
     return mapIter;
 }
 
-void cache::lfu_list_add(int x, const std::string& level) {
+void cache::lfu_list_add(int x, const int& level) {
     if(sizeOfLfu == capacityOfLfu) {
             ++capacityOfLfu;
             --capacityOfLru;
@@ -27,6 +27,14 @@ void cache::lfu_list_add(int x, const std::string& level) {
         ++sizeOfLfu;
         // std::cout << "New element in LFU. \n" << std::endl;
     }
+}
+
+int cache::new_level() {
+    ++num_of_levels;
+    int_list lst;
+    lfu_map.emplace(num_of_levels - 1, lst);
+    
+    return (num_of_levels - 1); 
 }
 
 level_map::iterator cache::lfu(int x) {
@@ -45,6 +53,9 @@ level_map::iterator cache::lfu(int x) {
 
         if (itCopy == lfu_map.end()) {
             // std::cout << "Number " << x << " is on the last level. \n" << std::endl;
+            (resOfFind -> second).remove(x);
+            int new_level {cache::new_level()};
+            (lfu_map[new_level]).push_back(x);
         }
 
         else {

@@ -3,16 +3,14 @@
 
 #include <iostream>
 #include <list>
-#include <unordered_map>
+#include <map>
 #include <iterator>
 #include <string.h>
 #include <fstream>
 #include <iomanip>
 
-#define NUM_OF_LEVELS 7
-
 typedef std::list <int> int_list;
-typedef std::unordered_map <std::string, int_list> level_map;
+typedef std::map <int, int_list> level_map;
 
 class cache {
     private:
@@ -23,12 +21,14 @@ class cache {
         size_t capacityOfLfu;
         size_t capacityOfLru;
         size_t sizeOfLfu;
+        size_t num_of_levels;
         size_t sizeOfLru;
         size_t numOfHits;
 
-        void lfu_list_add(int x, const std::string& level);
+        void lfu_list_add(int x, const int& level);
         void lru_list_add(int x);
         void list_garphdump(const int_list& lst, std::ofstream& file) const;
+        int new_level();
     
     public:
         cache(size_t capacityOfCache_);
@@ -49,6 +49,5 @@ template <typename Container, typename ConstIterator>
 typename Container::iterator remove_constness(Container& c, ConstIterator it) {
     return c.erase(it, it);
 }
-
 
 #endif

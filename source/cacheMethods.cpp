@@ -7,21 +7,20 @@ cache::cache(size_t capacityOfCache_):
     capacityOfLfu(capacityOfCache_ / 2), 
     capacityOfLru(capacityOfCache_ - capacityOfLfu), 
     sizeOfLfu(0),
+    num_of_levels(10),
     sizeOfLru(0),
     numOfHits(0) {
-    for (size_t i = 0; i < NUM_OF_LEVELS; ++i) {
-        std::string level = "Level ";
-        level += (NUM_OF_LEVELS - i - 1 + '0');
+    for (size_t i = 0; i < num_of_levels; ++i) {
         // std::cout << level << std::endl;
         int_list lst;
-        lfu_map[level] =  lst;
+        lfu_map[i] = lst;
     }
 }
 
 void cache::dump() const {
     std::cout << "DUMP: \n" << 
     " Capacity of cache = " << capacityOfCache << ". Capacity of LFU = " << capacityOfLfu <<". Capacity of LRU = " << capacityOfLru << ". \n" <<
-    " Size of LFU = " << sizeOfLfu << ". Size of LRU = " << sizeOfLru << ". \n" 
+    " Size of LFU = " << sizeOfLfu << ". Num of levels = " << num_of_levels << ". Size of LRU = " << sizeOfLru << ". \n" 
     " Number of hits = " << numOfHits << ". \n" << std::endl;
 
     level_map::const_iterator mapIter = lfu_map.begin();
