@@ -2,12 +2,14 @@
 #define CACHESETUP_H
 
 #include <iostream>
+#include <fstream>
 #include <list>
 #include <map>
 #include <iterator>
 #include <string.h>
 #include <fstream>
 #include <iomanip>
+#include <vector>
 
 typedef std::list <int> int_list;
 typedef std::map <int, int_list> level_map;
@@ -43,7 +45,11 @@ class cache {
         void graphdump() const;
 
         void show_hits() {std::cout << numOfHits << std::endl;}
+        int return_hits() {return numOfHits;}
 };
+
+int run_test(const std::vector<int>& args);
+void testing();
 
 template <typename Container, typename ConstIterator>
 typename Container::iterator remove_constness(Container& c, ConstIterator it) {
