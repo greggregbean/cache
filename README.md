@@ -12,4 +12,6 @@ If you want to see the work of cache in all details enter "./run detailed". In t
 and graphic vizualization. To see graphic vizualization of F&Q, you can open graph.dot with Graphviz or special extesion for .dot files in Visual Studio Code. It's really amusing to watch this in real time.
 
 So, I whish you like it. You can also look for another interesting projects in my profile.
-Have a nice day or night! (＠＾◡＾)
+Have a nice day or night! 
+
+(＠＾◡＾)
