@@ -12,7 +12,7 @@
 #include <vector>
 
 using int_list = std::list <int>;
-typedef std::map <int, int_list> level_map;
+using level_map = std::map <int, int_list>;
 
 class cache  final {
     private:
