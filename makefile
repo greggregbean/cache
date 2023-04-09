@@ -5,7 +5,7 @@ CC = g++
 override CXXFLAGS += -std=c++11 -Wall -Wextra -Wpedantic
 
 PREF_SRC = ./source/
-PREF_OBJ = ./object/
+PREF_OBJ = ./build/
 
 SRC = $(wildcard $(PREF_SRC)*.cpp)
 OBJ = $(patsubst $(PREF_SRC)%.cpp, $(PREF_OBJ)%.o, $(SRC))

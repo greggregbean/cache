@@ -11,10 +11,10 @@
 #include <iomanip>
 #include <vector>
 
-typedef std::list <int> int_list;
+using int_list = std::list <int>;
 typedef std::map <int, int_list> level_map;
 
-class cache {
+class cache  final {
     private:
         level_map lfu_map;
         int_list lru_list;
