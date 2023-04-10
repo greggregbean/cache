@@ -1,5 +1,5 @@
-TARGET = run
-HEADER = ./source/cacheSetup.h
+TARGET = ./build/run
+HEADER = ./source/cacheSetup.hpp
 
 CC = g++
 override CXXFLAGS += -std=c++11 -Wall -Wextra -Wpedantic

@@ -1,4 +1,4 @@
-#include "cacheSetup.h"
+#include "cacheSetup.hpp"
 
 int main(int argc, char* argv[]) {
   int numOfElems;

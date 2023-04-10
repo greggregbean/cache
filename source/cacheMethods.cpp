@@ -1,6 +1,6 @@
 // All coments are for debugging. Don't pay attention to them.
 
-#include "cacheSetup.h"
+#include "cacheSetup.hpp"
 
 cache::cache(size_t capacityOfCache_): 
     capacityOfCache(capacityOfCache_), 

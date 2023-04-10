@@ -1,6 +1,6 @@
 // All coments are for debugging. Don't pay attention to them.
 
-#include "cacheSetup.h"
+#include "cacheSetup.hpp"
 
 void cache::lru_list_add (int x) {
     if(sizeOfLru == capacityOfLru) {

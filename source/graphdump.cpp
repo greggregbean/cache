@@ -1,4 +1,4 @@
-#include "cacheSetup.h"
+#include "cacheSetup.hpp"
 
 void cache::list_garphdump(const int_list& lst, std::ofstream& file) const { 
     int_list::const_iterator iter = lst.begin();

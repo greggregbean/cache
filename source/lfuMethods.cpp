@@ -1,6 +1,6 @@
 // All coments are for debugging. Don't pay attention to them.
 
-#include "cacheSetup.h"
+#include "cacheSetup.hpp"
 
 level_map::const_iterator cache::map_find(int x) const {
     level_map::const_iterator mapIter = lfu_map.begin();
