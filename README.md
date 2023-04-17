@@ -4,7 +4,6 @@ Hi, user! This is my F&R cache. Let me tell you about it.
 F&R is a combination of LRU (Last Recently Used) and LFU (Last Frequently used) caches.
 It is called F&R, because it can split cache memory between LFU and LRU depending on what type of cache is more neccesarry in a moment. So when LFU has not enough memory it takes this memory from LRU and vice versa. LFU has bigger priority, then LRU. It means that, firstly, new element is placed in LRU, and when we hit at him, he is being replaced to LFU. 
 
-If you want to build this project, you should clone this repository and enter "make" in console.
 To run my cache just enter "./run" in console. It's recommended to run tests firstly by entering
 "./run test" in console.
 
