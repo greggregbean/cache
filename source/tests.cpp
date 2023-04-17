@@ -5,7 +5,7 @@ void run_test(int& num_of_test, const std::vector<int>& args, int right_answer) 
     std::copy(args.begin(), args.end(), std::ostream_iterator<int>(std::cout, "; "));
     
     int capacity = args[0];
-    cache cacheMem(capacity);
+    cache::FR cacheMem(capacity);
 
     int num_of_elements = args[1];
     if(num_of_elements != (static_cast<int>(args.size()) - 2)) 

@@ -13,7 +13,9 @@
 using int_list = std::list <int>;
 using level_map = std::map <int, int_list>;
 
-class cache final {
+namespace cache {
+
+class FR final {
     private:
         level_map lfu_map;
         int_list lru_list;
@@ -32,7 +34,7 @@ class cache final {
         int new_level();
     
     public:
-        cache(size_t capacityOfCache_);
+        FR(size_t capacityOfCache_);
 
         int_list::const_iterator list_find(int x, const int_list& currentList) const;
         level_map::const_iterator map_find(int x) const;
@@ -46,6 +48,8 @@ class cache final {
         void show_hits() {std::cout << numOfHits << std::endl;}
         int return_hits() {return numOfHits;}
 };
+
+}
 
 int run_test(const std::vector<int>& args);
 void testing();

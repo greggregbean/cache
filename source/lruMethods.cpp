@@ -2,7 +2,9 @@
 
 #include "cacheSetup.hpp"
 
-void cache::lru_list_add (int x) {
+namespace cache {
+
+void FR::lru_list_add (int x) {
     if(sizeOfLru == capacityOfLru) {
         if(sizeOfLfu == capacityOfLfu) {
             // std::cout << "Cache overflow! (⌣̀_⌣́)" << std::endl;
@@ -43,7 +45,7 @@ void cache::lru_list_add (int x) {
     }
 }
 
-int_list::iterator cache::lru(int x) {
+int_list::iterator FR::lru(int x) {
     int_list::iterator resOfFind = remove_constness(lru_list, list_find(x, lru_list));
 
     if(resOfFind != lru_list.end()) {
@@ -58,5 +60,7 @@ int_list::iterator cache::lru(int x) {
     else lru_list_add(x);
 
     return resOfFind;
+}
+
 }
 

@@ -2,7 +2,9 @@
 
 #include "cacheSetup.hpp"
 
-cache::cache(size_t capacityOfCache_): 
+namespace cache {
+
+FR::FR(size_t capacityOfCache_): 
     capacityOfCache(capacityOfCache_), 
     capacityOfLfu(capacityOfCache_ / 2), 
     capacityOfLru(capacityOfCache_ - capacityOfLfu), 
@@ -17,7 +19,7 @@ cache::cache(size_t capacityOfCache_):
     }
 }
 
-void cache::dump() const {
+void FR::dump() const {
     std::cout << "DUMP: \n" << 
     " Capacity of cache = " << capacityOfCache << ". Capacity of LFU = " << capacityOfLfu <<". Capacity of LRU = " << capacityOfLru << ". \n" <<
     " Size of LFU = " << sizeOfLfu << ". Num of levels = " << num_of_levels << ". Size of LRU = " << sizeOfLru << ". \n" 
@@ -38,11 +40,13 @@ void cache::dump() const {
     std::cout << "\n" << std::endl;
 }
 
-int_list::const_iterator cache::list_find (int x, const int_list& currentList) const {
+int_list::const_iterator FR::list_find (int x, const int_list& currentList) const {
     int_list::const_iterator listIter = currentList.begin();
     while(listIter != currentList.end()) {
         if(*listIter == x) break;
         ++listIter;
     }
     return listIter;
+}
+
 }
