@@ -1,5 +1,4 @@
-#ifndef CACHESETUP_H
-#define CACHESETUP_H
+#pragma once
 
 #include <iostream>
 #include <fstream>
@@ -14,7 +13,7 @@
 using int_list = std::list <int>;
 using level_map = std::map <int, int_list>;
 
-class cache  final {
+class cache final {
     private:
         level_map lfu_map;
         int_list lru_list;
@@ -55,5 +54,3 @@ template <typename Container, typename ConstIterator>
 typename Container::iterator remove_constness(Container& c, ConstIterator it) {
     return c.erase(it, it);
 }
-
-#endif

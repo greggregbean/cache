@@ -19,7 +19,7 @@ void cache::list_garphdump(const int_list& lst, std::ofstream& file) const {
 
 void cache::graphdump() const {
     std::ofstream file;
-    file.open("../graph.dot", std::ofstream::out);
+    file.open("../build/graph.dot", std::ofstream::out);
     file << "digraph {\n\
     subgraph cluster_lfu {\n\
         node [shape=record, fillcolor = darkolivegreen2, style = filled ]\n\
