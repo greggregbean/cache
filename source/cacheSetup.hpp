@@ -51,7 +51,7 @@ class FR final {
 
 }
 
-int run_test(const std::vector<int>& args);
+void run_test(int& num_of_test, const std::vector<int>& args, int right_answer);
 void testing();
 
 template <typename Container, typename ConstIterator>
