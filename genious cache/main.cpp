@@ -2,7 +2,7 @@
 
 int main() {
     int numOfElems;
-    int capacityOfCache;
+    size_t capacityOfCache;
 
     std::cin >> numOfElems;
     std::cin >> capacityOfCache;
@@ -16,5 +16,5 @@ int main() {
         i_values.push_back(value);
     }
 
-    belady(i_values);
+    std::cout << "Total num of hits = " << belady(i_values, capacityOfCache) << std::endl;
 }
