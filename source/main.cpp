@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
         std::cin >> numOfElems;
       }
       
-      cache::FR cacheMem (capacityOfCache);
+      FR cacheMem (capacityOfCache);
       cacheMem.dump();
       cacheMem.graphdump();
 
@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
   else {
     std::cin >> capacityOfCache;
     std::cin >> numOfElems;
-    cache::FR cacheMem (capacityOfCache);
+    FR cacheMem (capacityOfCache);
 
     int x;
     for(int i = 0; i < numOfElems; ++i) {

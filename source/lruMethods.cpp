@@ -2,8 +2,6 @@
 
 #include "cacheSetup.hpp"
 
-namespace cache {
-
 void FR::lru_list_add (int x) {
     if(sizeOfLru == capacityOfLru) {
         if(sizeOfLfu == capacityOfLfu) {
@@ -60,7 +58,5 @@ int_list::iterator FR::lru(int x) {
     else lru_list_add(x);
 
     return resOfFind;
-}
-
 }
 

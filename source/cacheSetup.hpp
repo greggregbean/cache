@@ -13,8 +13,6 @@
 using int_list = std::list <int>;
 using level_map = std::map <int, int_list>;
 
-namespace cache {
-
 class FR final {
     private:
         level_map lfu_map;
@@ -48,8 +46,6 @@ class FR final {
         void show_hits() {std::cout << numOfHits << std::endl;}
         int return_hits() {return numOfHits;}
 };
-
-}
 
 void run_test(int& num_of_test, const std::vector<int>& args, int right_answer);
 void testing();

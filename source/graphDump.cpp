@@ -1,7 +1,5 @@
 #include "cacheSetup.hpp"
 
-namespace cache {
-
 void FR::list_garphdump(const int_list& lst, std::ofstream& file) const { 
     int_list::const_iterator iter = lst.begin();
     while(iter != lst.end()) {
@@ -19,7 +17,7 @@ void FR::list_garphdump(const int_list& lst, std::ofstream& file) const {
     }
 }
 
-void cache::FR::graphdump() const {
+void FR::graphdump() const {
     std::ofstream file;
     file.open("../build/graph.dot", std::ofstream::out);
     file << "digraph {\n\
@@ -45,6 +43,4 @@ void cache::FR::graphdump() const {
     file << std::setw(4) << "}\n\n}";
 
     file.close();
-}
-
 }

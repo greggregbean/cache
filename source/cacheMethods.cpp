@@ -2,8 +2,6 @@
 
 #include "cacheSetup.hpp"
 
-namespace cache {
-
 FR::FR(size_t capacityOfCache_): 
     capacityOfCache(capacityOfCache_), 
     capacityOfLfu(capacityOfCache_ / 2), 
@@ -47,6 +45,4 @@ int_list::const_iterator FR::list_find (int x, const int_list& currentList) cons
         ++listIter;
     }
     return listIter;
-}
-
 }

@@ -2,8 +2,6 @@
 
 #include "cacheSetup.hpp"
 
-namespace cache {
-
 level_map::const_iterator FR::map_find(int x) const {
     level_map::const_iterator mapIter = lfu_map.begin();
     while (mapIter != lfu_map.end()) {
@@ -71,6 +69,4 @@ level_map::iterator FR::lfu(int x) {
     }
 
     return resOfFind;
-}
-
 }
