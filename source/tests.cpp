@@ -1,4 +1,4 @@
-#include "cacheSetup.hpp"
+#include "fr_cache.hpp"
 
 void run_test(int& num_of_test, const std::vector<int>& args, int right_answer) {
     std::cout << "Test "<< num_of_test <<". Args: ";

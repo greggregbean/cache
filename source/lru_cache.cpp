@@ -1,8 +1,9 @@
-// All coments are for debugging. Don't pay attention to them.
+#include "lru_cache.hpp"
 
-#include "cacheSetup.hpp"
+namespace lru_cache
+{
 
-void FR::lru_list_add (int x) {
+void lru_list_add (int x) {
     if(sizeOfLru == capacityOfLru) {
         if(sizeOfLfu == capacityOfLfu) {
             // std::cout << "Cache overflow! (⌣̀_⌣́)" << std::endl;
@@ -43,20 +44,54 @@ void FR::lru_list_add (int x) {
     }
 }
 
-int_list::iterator FR::lru(int x) {
-    int_list::iterator resOfFind = remove_constness(lru_list, list_find(x, lru_list));
+/* It's recomended to use 1 of 3 wrappers bellow instead of
+   calling this function directly. */
+int_list::const_iterator find (int x) const 
+{
+    int_list::const_iterator list_it = list.begin();
 
-    if(resOfFind != lru_list.end()) {
-        // std::cout << "LRU HIT! (◕‿◕)\n" << std::endl;
-        ++numOfHits;
-
-        lru_list.erase(resOfFind);
-        --sizeOfLru;
-        lfu_list_add(x, 0);
+    while(list_it != cur_list.end()) 
+    {
+        if(*list_it == x)
+            break; 
+            
+        ++list_it;
     }
 
-    else lru_list_add(x);
-
-    return resOfFind;
+    return list_it;
 }
 
+int_list::iterator get_pos (int x)
+{
+    find (x);
+    return last_found;
+}
+
+int_list::iterator get_last_found ()
+{
+    return last_found;
+}
+
+bool is_inside (int x) 
+{
+    find (x);
+    return last_found != list.end();
+}
+
+void erase_last_found ()
+{
+    
+}
+
+void dump() const
+{
+    std::cout << "---------LRU---------"   << std::endl
+              << "capacity = " << capacity << std::endl 
+              << "size = "     << size     << std::endl;
+
+    copy(lru_list.begin(), lru_list.end(), std::ostream_iterator<int>(std::cout, ";"));
+
+    std::cout << "---------------------" << std::endl;
+}
+
+};

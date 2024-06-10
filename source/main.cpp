@@ -1,60 +1,68 @@
-#include "cacheSetup.hpp"
+#include "fr_cache.hpp"
 
-int main(int argc, char* argv[]) {
-  int numOfElems;
-  int capacityOfCache;
+int main(int argc, char* argv[]) 
+{
+  int num;
+  int capacity
+  int x;
 
-  if (argv[1] != nullptr) {
-    if (strcmp(argv[1], "detailed") == 0) {
+  if (argv[1] != nullptr) 
+  {
+    if (strcmp(argv[1], "detailed") == 0) 
+    {
       std::cout << "Enter capacity of cache and  number of elements:" << std::endl;
 
-      std::cin >> capacityOfCache;
-      while(capacityOfCache <= 0) { 
+      std::cin >> capacity;
+      while (capacity <= 0) 
+      { 
         std::cout << "Wrong capacity!!!" << std::endl;
-        std::cin >> capacityOfCache;
+        std::cin >> capacity
       }
 
-      std::cin >> numOfElems;
-      while(numOfElems <= 0) {
+      std::cin >> num;
+      while(num <= 0) 
+      {
         std::cout << "Wrong num of elements!!!" << std::endl;
-        std::cin >> numOfElems;
+        std::cin >> num;
       }
       
-      FR cacheMem (capacityOfCache);
-      cacheMem.dump();
-      cacheMem.graphdump();
+      fr_cache cache_mem (capacity);
+      cache_mem.dump();
+      cache_mem.graphdump();
 
-      int x;
-      for(int i = 0; i < numOfElems; ++i) {
-        std::cout << i <<") Left " << numOfElems - i << " numbers. Enter a number: " << std::endl;
+      
+      for(int i = 0; i < num; ++i) 
+      {
+        std::cout << i <<") Left " << num - i << " numbers. Enter a number: " << std::endl;
         std::cin >> x;
-        cacheMem.lfu(x);
-        cacheMem.dump();
-        cacheMem.graphdump();
-      } 
-
-      cacheMem.dump();
+        cache_mem.cache(x);
+        cache_mem.dump();
+        cache_mem.graphdump();
+      }
 
       std::cout << "Total num of hits: ";
-      cacheMem.show_hits();
+      cache_mem.show_hits();
     }
 
-    if(strcmp(argv[1], "test") == 0) {
+    if(strcmp(argv[1], "test") == 0)
+    {
       testing();
     }
   }
 
-  else {
-    std::cin >> capacityOfCache;
-    std::cin >> numOfElems;
-    FR cacheMem (capacityOfCache);
+  else 
+  {
+    std::cin >> capacity;
+    std::cin >> num;
 
-    int x;
-    for(int i = 0; i < numOfElems; ++i) {
+    fr_cache cache_mem (capacity);
+
+    for(int i = 0; i < num; ++i) 
+    {
       std::cin >> x;
-      cacheMem.lfu(x);
+      cache_mem.cache (x);
     } 
 
-    cacheMem.show_hits();
+    cache_mem.show_hits();
   }
 }

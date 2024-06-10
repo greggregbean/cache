@@ -1,6 +1,9 @@
-#include "cacheSetup.hpp"
+#include "fr_cache.hpp"
 
-void FR::list_garphdump(const int_list& lst, std::ofstream& file) const { 
+namespace fr_cache 
+{
+
+void list_graphdump(const int_list& lst, std::ofstream& file) const { 
     int_list::const_iterator iter = lst.begin();
     while(iter != lst.end()) {
         file << std::setw(9) << *iter << " [ label = \" "<< *iter << " \"] \n";
@@ -17,7 +20,7 @@ void FR::list_garphdump(const int_list& lst, std::ofstream& file) const {
     }
 }
 
-void FR::graphdump() const {
+void graphdump() const {
     std::ofstream file;
     file.open("../build/graph.dot", std::ofstream::out);
     file << "digraph {\n\
@@ -29,7 +32,7 @@ void FR::graphdump() const {
     int i = 0;
     while(mapIter != lfu_map.end()) {
         file << std::setw(14) <<"Level_" << i << "[ fillcolor = darkolivegreen, label = \"Level " << mapIter -> first << "\"] \n";
-        list_garphdump(mapIter -> second, file);
+        list_graphdump(mapIter -> second, file);
         if((mapIter -> second).begin() != (mapIter -> second).end())
             file << std::setw(14) << "Level_" << i << " -> " << (mapIter -> second).front() << "; \n\n";
         ++mapIter;
@@ -39,8 +42,10 @@ void FR::graphdump() const {
     subgraph cluster_lru {\n\
         node [shape=record, fillcolor = darkolivegreen2, style = filled ]\n\
         label = \"LRU part\";\n";
-    list_garphdump(lru_list, file);
+    list_graphdump (lru_list, file);
     file << std::setw(4) << "}\n\n}";
 
     file.close();
 }
+
+};
